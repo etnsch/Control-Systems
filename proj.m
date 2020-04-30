@@ -8,6 +8,12 @@ figure %figure to display original map
 show(map)
 mapInflated = copy(map);
 prm = robotics.PRM(mapInflated);
+
+%Nodes in path
+prm.NumNodes = 100;
+prm.ConnectionDistance = 10;
+
+%Start & end locations
 startLocation = [4.0 2.0];
 endLocation = [23.0 8.0];
 
@@ -31,10 +37,6 @@ robot = differentialDriveKinematics("TrackWidth", 1, "VehicleInputs", "VehicleSp
 
 %Increases size of the occupied locations in the map
 inflate(mapInflated, robot.TrackWidth/2);
-
-%Nodes in path
-prm.NumNodes = 100;
-prm.ConnectionDistance = 10;
 
 %Initialize controller
 controller = controllerPurePursuit;     %Robot controller - returns linear & angular velocity based on current position & orientation
